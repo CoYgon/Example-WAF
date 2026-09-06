@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="NOVA WAF V3 Security Dashboard"
+  >
+
+  <title>NOVA WAF V3</title>
+
+  <link
+    rel="stylesheet"
+    href="/style.css"
+  >
+</head>
+
+<body>
+
+<div class="background-grid"></div>
+
+<header class="topbar">
+
+  <div class="brand">
+    <div class="brand-icon">N</div>
+
+    <div>
+      <div class="brand-name">
+        NOVA WAF
+      </div>
+
+      <div class="brand-version">
+        APPLICATION FIREWALL · V3
+      </div>
+    </div>
+  </div>
+
+  <div class="system-status">
+    <span class="status-dot"></span>
+    PROTECTION ACTIVE
+  </div>
+
+</header>
+
+<main class="container">
+
+  <section class="hero">
+
+    <div>
+      <div class="eyebrow">
+        SECURITY OPERATIONS CENTER
+      </div>
+
+      <h1>
+        Web Application
+        <span>Firewall</span>
+      </h1>
+
+      <p>
+        Real-time threat detection,
+        rate limiting and application-layer
+        protection for Node.js.
+      </p>
+    </div>
+
+    <div class="hero-badge">
+      <strong>V3</strong>
+      <span>ACTIVE</span>
+    </div>
+
+  </section>
+
+  <section class="stats">
+
+    <div class="stat">
+      <span>TOTAL REQUESTS</span>
+      <strong id="totalRequests">0</strong>
+    </div>
+
+    <div class="stat">
+      <span>BLOCKED</span>
+      <strong id="blockedRequests">0</strong>
+    </div>
+
+    <div class="stat">
+      <span>THREATS</span>
+      <strong id="detectedThreats">0</strong>
+    </div>
+
+    <div class="stat">
+      <span>ACTIVE BANS</span>
+      <strong id="activeBans">0</strong>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <div class="panel">
+
+      <div class="panel-header">
+        <div>
+          <small>CLIENT SECURITY</small>
+          <h2>Current Profile</h2>
+        </div>
+
+        <button
+          class="secondary"
+          onclick="resetProfile()"
+        >
+          RESET
+        </button>
+      </div>
+
+      <div class="profile-grid">
+
+        <div>
+          <label>CLIENT IP</label>
+          <strong id="clientIP">-</strong>
+        </div>
+
+        <div>
+          <label>THREAT SCORE</label>
+          <strong id="score">0</strong>
+        </div>
+
+        <div>
+          <label>BAN LEVEL</label>
+          <strong id="banLevel">
+            NONE
+          </strong>
+        </div>
+
+        <div>
+          <label>REQUESTS</label>
+          <strong id="profileRequests">
+            0
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="score-container">
+
+        <div class="score-label">
+          <span>THREAT SCORE</span>
+          <span id="scoreText">0 / 100</span>
+        </div>
+
+        <div class="score-track">
+          <div
+            id="scoreBar"
+            class="score-bar"
+          ></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel">
+
+      <div class="panel-header">
+        <div>
+          <small>DEFENSIVE TESTING</small>
+          <h2>Security Tests</h2>
+        </div>
+      </div>
+
+      <div class="test-grid">
+
+        <button
+          class="test normal"
+          onclick="normalRequest()"
+        >
+          <span>01</span>
+          NORMAL REQUEST
+        </button>
+
+        <button
+          class="test rate"
+          onclick="rateLimitTest()"
+        >
+          <span>02</span>
+          RATE LIMIT
+        </button>
+
+        <button
+          class="test threat"
+          onclick="sqliTest()"
+        >
+          <span>03</span>
+          SQLi DETECTION
+        </button>
+
+        <button
+          class="test threat"
+          onclick="xssTest()"
+        >
+          <span>04</span>
+          XSS DETECTION
+        </button>
+
+        <button
+          class="test threat"
+          onclick="scannerTest()"
+        >
+          <span>05</span>
+          SCANNER DETECTION
+        </button>
+
+        <button
+          class="test danger"
+          onclick="rceTest()"
+        >
+          <span>06</span>
+          COMMAND DETECTION
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="panel">
+
+    <div class="panel-header">
+      <div>
+        <small>LIVE TELEMETRY</small>
+        <h2>Security Events</h2>
+      </div>
+
+      <span
+        id="eventStatus"
+        class="live"
+      >
+        LIVE
+      </span>
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>TIME</th>
+            <th>ACTION</th>
+            <th>TYPE</th>
+            <th>IP</th>
+            <th>SCORE</th>
+            <th>PATH</th>
+          </tr>
+        </thead>
+
+        <tbody id="events">
+          <tr>
+            <td colspan="6">
+              Waiting for events...
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <section class="panel">
+
+    <div class="panel-header">
+      <div>
+        <small>THREAT INTELLIGENCE</small>
+        <h2>Violation History</h2>
+      </div>
+    </div>
+
+    <div
+      id="history"
+      class="history"
+    >
+      No violations detected.
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  NOVA WAF V3 · OPEN SOURCE APPLICATION FIREWALL
+</footer>
+
+<script src="/app.js"></script>
+
+</body>
+</html>

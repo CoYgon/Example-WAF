@@ -1,0 +1,24 @@
+services:
+  nova-waf:
+    build: .
+    container_name: nova-waf
+    restart: unless-stopped
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+
+      TRUST_PROXY: "false"
+
+      WINDOW_MS: 60000
+      MAX_REQUESTS_PER_WINDOW: 60
+
+      SOFT_THRESHOLD: 30
+      HARD_THRESHOLD: 60
+      CRITICAL_THRESHOLD: 100
+
+      ADMIN_TOKEN: "CHANGE_THIS_TOKEN"

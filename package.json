@@ -1,0 +1,36 @@
+{
+  "name": "nova-waf",
+  "version": "3.0.0",
+  "description": "NOVA WAF - Open Source Application Layer Web Application Firewall for Node.js",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+  },
+  "keywords": [
+    "waf",
+    "firewall",
+    "security",
+    "web-security",
+    "nodejs",
+    "express",
+    "rate-limit",
+    "threat-detection"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
